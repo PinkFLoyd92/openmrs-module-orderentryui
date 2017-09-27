@@ -59,7 +59,7 @@ ${ ui.includeFragment("coreapps", "patientHeader", [ patient: patient ]) }
                 <p>
                     <span ng-show="newDraftDrugOrder.action === 'NEW'">
                         <label>Nueva orden de:</label>
-                        <select-drug ng-model="newDraftDrugOrder.drug" placeholder="Drug" size="40"></select-drug>
+                        <select-drug ng-model="newDraftDrugOrder.drug" placeholder="Droga" size="40"></select-drug>
                     </span>
                     <strong ng-show="newDraftDrugOrder.action === 'REVISE'">
                         Orden revisada para: {{ newDraftDrugOrder.drug.display }}
@@ -78,36 +78,36 @@ ${ ui.includeFragment("coreapps", "patientHeader", [ patient: patient ]) }
                     </label>
 
                     <span ng-if="newDraftDrugOrder.dosingType == 'org.openmrs.SimpleDosingInstructions'">
-                        <input ng-model="newDraftDrugOrder.dose" type="number" placeholder="Dose" min="0" required/>
-                        <select-concept-from-list ng-model="newDraftDrugOrder.doseUnits" concepts="doseUnits" placeholder="Units" size="5" required></select-concept-from-list>
+                        <input ng-model="newDraftDrugOrder.dose" type="number" placeholder="Dosis" min="0" required/>
+                        <select-concept-from-list ng-model="newDraftDrugOrder.doseUnits" concepts="doseUnits" placeholder="Unidades" size="5" required></select-concept-from-list>
 
-                        <select-order-frequency ng-model="newDraftDrugOrder.frequency" frequencies="frequencies" placeholder="Frequency" required></select-order-frequency>
+                        <select-order-frequency ng-model="newDraftDrugOrder.frequency" frequencies="frequencies" placeholder="Frecuencia" required></select-order-frequency>
 
-                        <select-concept-from-list ng-model="newDraftDrugOrder.route" concepts="routes" placeholder="Route" size="20" required></select-concept-from-list>
+                        <select-concept-from-list ng-model="newDraftDrugOrder.route" concepts="routes" placeholder="Vía" size="20" required></select-concept-from-list>
                         <br/>
 
                         <label ng-class="{ disabled: !newDraftDrugOrder.asNeededCondition }">Usada para:</label>
-                        <input ng-model="newDraftDrugOrder.asNeededCondition" type="text" size="30" placeholder="reason (optional)"/>
+                        <input ng-model="newDraftDrugOrder.asNeededCondition" type="text" size="30" placeholder="Razón (Opcional)"/>
                         <br/>
 
                         <label ng-class="{ disabled: !newDraftDrugOrder.duration }">Para</label>
-                        <input ng-model="newDraftDrugOrder.duration" type="number" min="0" placeholder="Duration" />
-                        <select-concept-from-list ng-model="newDraftDrugOrder.durationUnits" concepts="durationUnits" placeholder="Units" size="8" required-if="newDraftDrugOrder.duration"></select-concept-from-list>
+                        <input ng-model="newDraftDrugOrder.duration" type="number" min="0" placeholder="Duración" />
+                        <select-concept-from-list ng-model="newDraftDrugOrder.durationUnits" concepts="durationUnits" placeholder="Unidades" size="8" required-if="newDraftDrugOrder.duration"></select-concept-from-list>
                         <label ng-class="{ disabled: !newDraftDrugOrder.duration }">total</label>
                         <br/>
-                        <textarea ng-model="newDraftDrugOrder.dosingInstructions" rows="2" cols="60" placeholder="Additional instruction not covered above"></textarea>
+                        <textarea ng-model="newDraftDrugOrder.dosingInstructions" rows="2" cols="60" placeholder="Instrucción adicional no mencionada"></textarea>
                     </span>
 
                     <span ng-if="newDraftDrugOrder.dosingType == 'org.openmrs.FreeTextDosingInstructions'">
-                        <textarea ng-model="newDraftDrugOrder.dosingInstructions" rows="4" cols="60" placeholder="Complete instructions"></textarea>
+                        <textarea ng-model="newDraftDrugOrder.dosingInstructions" rows="4" cols="60" placeholder="Instrucciones completas"></textarea>
                     </span>
                 </p>
 
                 <p ng-if="newDraftDrugOrder.drug && careSetting.careSettingType == 'OUTPATIENT'">
                     <label class="heading">Para ordenes de pacientes externos</label>
                     Dispensar:
-                    <input ng-model="newDraftDrugOrder.quantity" type="number" min="0" placeholder="Quantity" required/>
-                    <select-concept-from-list ng-model="newDraftDrugOrder.quantityUnits" concepts="quantityUnits" placeholder="Units" size="8"></select-concept-from-list>
+                    <input ng-model="newDraftDrugOrder.quantity" type="number" min="0" placeholder="Cantidad" required/>
+                    <select-concept-from-list ng-model="newDraftDrugOrder.quantityUnits" concepts="quantityUnits" placeholder="Unidades" size="8"></select-concept-from-list>
                 </p>
 
                 <p ng-show="newDraftDrugOrder.drug">
@@ -128,7 +128,7 @@ ${ ui.includeFragment("coreapps", "patientHeader", [ patient: patient ]) }
                             {{ order | instructions }}
                             <span ng-show="order.action == 'DISCONTINUE'">
                                 <br/>
-                                Para: <input ng-model="order.orderReasonNonCoded" class="dc-reason" type="text" placeholder="reason" size="40"/>
+                                Para: <input ng-model="order.orderReasonNonCoded" class="dc-reason" type="text" placeholder="razón" size="40"/>
                             </span>
                         </td>
                         <td class="actions">

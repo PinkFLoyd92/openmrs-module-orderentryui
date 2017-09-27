@@ -20,7 +20,7 @@
 
     OpenMRS.dosingTypes = [
         {
-            display: 'Standard Dosing',
+            display: 'Dosis estándar',
             icon: 'icon-th-large',
             javaClass: 'org.openmrs.SimpleDosingInstructions',
             defaults: {
@@ -49,9 +49,9 @@
                     order.dose + " " + order.doseUnits.display + ", " +
                     order.frequency.display + ", " +
                     order.route.display +
-                    (order.asNeeded ? ", as needed" + (order.asNeededCondition ? " for " + order.asNeededCondition : "") : "");
+                    (order.asNeeded ? ", " + (order.asNeededCondition ? "" + order.asNeededCondition : "") : "");
                 if (order.duration) {
-                    str += ", for " + order.duration + " " + order.durationUnits.display + " total";
+                    str += ", " + order.duration + " " + order.durationUnits.display + " total";
                 }
                 if (order.dosingInstructions) {
                     str += " (" + order.dosingInstructions + ")";
@@ -76,7 +76,7 @@
             }
         },
         {
-            display: 'Free Text',
+            display: 'Texto libre',
             icon: 'icon-edit',
             javaClass: 'org.openmrs.FreeTextDosingInstructions',
             defaults: {
