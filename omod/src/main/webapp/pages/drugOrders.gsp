@@ -58,17 +58,17 @@ ${ ui.includeFragment("coreapps", "patientHeader", [ patient: patient ]) }
             <form id="new-order" class="sized-inputs css-form" name="newOrderForm" novalidate>
                 <p>
                     <span ng-show="newDraftDrugOrder.action === 'NEW'">
-                        <label>New order for:</label>
+                        <label>Nueva orden de:</label>
                         <select-drug ng-model="newDraftDrugOrder.drug" placeholder="Drug" size="40"></select-drug>
                     </span>
                     <strong ng-show="newDraftDrugOrder.action === 'REVISE'">
-                        Revised order for: {{ newDraftDrugOrder.drug.display }}
+                        Orden revisada para: {{ newDraftDrugOrder.drug.display }}
                     </strong>
                 </p>
 
                 <p ng-show="newDraftDrugOrder.drug">
                     <label class="heading instructions">
-                        <span>Instructions</span>
+                        <span>Instrucciones</span>
                         <a ng-repeat="dosingType in dosingTypes" tabindex="-1"
                            ng-click="newDraftDrugOrder.dosingType = dosingType.javaClass"
                            ng-class="{ active: newDraftDrugOrder.dosingType == dosingType.javaClass }">
@@ -86,11 +86,11 @@ ${ ui.includeFragment("coreapps", "patientHeader", [ patient: patient ]) }
                         <select-concept-from-list ng-model="newDraftDrugOrder.route" concepts="routes" placeholder="Route" size="20" required></select-concept-from-list>
                         <br/>
 
-                        <label ng-class="{ disabled: !newDraftDrugOrder.asNeededCondition }">As needed for</label>
+                        <label ng-class="{ disabled: !newDraftDrugOrder.asNeededCondition }">Usada para:</label>
                         <input ng-model="newDraftDrugOrder.asNeededCondition" type="text" size="30" placeholder="reason (optional)"/>
                         <br/>
 
-                        <label ng-class="{ disabled: !newDraftDrugOrder.duration }">For</label>
+                        <label ng-class="{ disabled: !newDraftDrugOrder.duration }">Para</label>
                         <input ng-model="newDraftDrugOrder.duration" type="number" min="0" placeholder="Duration" />
                         <select-concept-from-list ng-model="newDraftDrugOrder.durationUnits" concepts="durationUnits" placeholder="Units" size="8" required-if="newDraftDrugOrder.duration"></select-concept-from-list>
                         <label ng-class="{ disabled: !newDraftDrugOrder.duration }">total</label>
@@ -104,20 +104,20 @@ ${ ui.includeFragment("coreapps", "patientHeader", [ patient: patient ]) }
                 </p>
 
                 <p ng-if="newDraftDrugOrder.drug && careSetting.careSettingType == 'OUTPATIENT'">
-                    <label class="heading">For outpatient orders</label>
-                    Dispense:
+                    <label class="heading">Para ordenes de pacientes externos</label>
+                    Dispensar:
                     <input ng-model="newDraftDrugOrder.quantity" type="number" min="0" placeholder="Quantity" required/>
                     <select-concept-from-list ng-model="newDraftDrugOrder.quantityUnits" concepts="quantityUnits" placeholder="Units" size="8"></select-concept-from-list>
                 </p>
 
                 <p ng-show="newDraftDrugOrder.drug">
-                    <button type="submit" class="confirm right" ng-disabled="newOrderForm.\$invalid" ng-click="addNewDraftOrder()">Add</button>
-                    <button class="cancel" ng-click="cancelNewDraftOrder()">Cancel</button>
+                    <button type="submit" class="confirm right" ng-disabled="newOrderForm.\$invalid" ng-click="addNewDraftOrder()">Agregar</button>
+                    <button class="cancel" ng-click="cancelNewDraftOrder()">Cancelar</button>
                 </p>
             </form>
 
             <div id="draft-orders" ng-show="draftDrugOrders.length > 0">
-                <h3>Unsaved Draft Orders ({{ draftDrugOrders.length }})</h3>
+                <h3>Ordenes temporales no grabadas ({{ draftDrugOrders.length }})</h3>
                 <table>
                     <tr class="draft-order" ng-repeat="order in draftDrugOrders">
                         <td>
@@ -128,7 +128,7 @@ ${ ui.includeFragment("coreapps", "patientHeader", [ patient: patient ]) }
                             {{ order | instructions }}
                             <span ng-show="order.action == 'DISCONTINUE'">
                                 <br/>
-                                For: <input ng-model="order.orderReasonNonCoded" class="dc-reason" type="text" placeholder="reason" size="40"/>
+                                Para: <input ng-model="order.orderReasonNonCoded" class="dc-reason" type="text" placeholder="reason" size="40"/>
                             </span>
                         </td>
                         <td class="actions">
@@ -140,7 +140,7 @@ ${ ui.includeFragment("coreapps", "patientHeader", [ patient: patient ]) }
 
                 <div class="actions">
                     <div class="signature">
-                        Signing as ${ ui.format(sessionContext.currentProvider) } on (auto-generated timestamp)
+                        Firmando como ${ ui.format(sessionContext.currentProvider) } el (auto-generated timestamp)
                         <img ng-show="loading" src="${ ui.resourceLink("uicommons", "images/spinner.gif") }"/>
                     </div>
                     <button class="confirm right" ng-disabled="loading" ng-click="signAndSaveDraftDrugOrders()">Sign and Save</button>
@@ -150,9 +150,9 @@ ${ ui.includeFragment("coreapps", "patientHeader", [ patient: patient ]) }
                 </div>
             </div>
 
-            <h3>Active Drug Orders</h3>
+            <h3>Ordenes Activas de Drogas</h3>
             <span ng-show="activeDrugOrders.loading">${ ui.message("uicommons.loading.placeholder") }</span>
-            <span ng-hide="activeDrugOrders.loading || activeDrugOrders.length > 0">None</span>
+            <span ng-hide="activeDrugOrders.loading || activeDrugOrders.length > 0">Ninguna</span>
             <table ng-hide="activeDrugOrders.loading">
                 <tr ng-repeat="order in activeDrugOrders">
                     <td ng-class="{ 'will-replace': replacementFor(order) }">
@@ -175,9 +175,9 @@ ${ ui.includeFragment("coreapps", "patientHeader", [ patient: patient ]) }
                 </tr>
             </table>
 
-            <h3>Past Drug Orders</h3>
+            <h3>Ordenes de drogas pasadas</h3>
             <span ng-show="pastDrugOrders.loading">${ ui.message("uicommons.loading.placeholder") }</span>
-            <span ng-hide="pastDrugOrders.loading || pastDrugOrders.length > 0">None</span>
+            <span ng-hide="pastDrugOrders.loading || pastDrugOrders.length > 0">Ninguna</span>
             <table id="past-drug-orders" ng-hide="pastDrugOrders.loading">
                 <tr ng-repeat="order in pastDrugOrders">
                     <td>
